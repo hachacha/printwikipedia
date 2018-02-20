@@ -25,7 +25,6 @@ public class WikiRestart {
                String pathName = lastFile.getCanonicalPath();
                pathArray = pathName.split("/");
                lastOutput = pathArray[pathArray.length - 1];
-//               System.out.println(lastOutput);
                if(lastOutput.startsWith("_")){
                    lastOutput = lastOutput.substring(1, lastOutput.length());
                    System.out.println(lastOutput);
@@ -41,7 +40,6 @@ public class WikiRestart {
             String[] settings = lastOutput.split("[-.]");
             startVol = Integer.parseInt(settings[1]);
             System.out.println(startVol);
-//            System.exit(1);
             startLimit = Integer.parseInt(settings[0]);
             startPage = Integer.parseInt(settings[2]);
             settings = null;

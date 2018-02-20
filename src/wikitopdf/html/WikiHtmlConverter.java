@@ -1,5 +1,8 @@
 package wikitopdf.html;
 
+import info.bliki.wiki.model.Reference;
+import java.io.IOException;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -14,11 +17,13 @@ public class WikiHtmlConverter {
      * @param text
      * @return
      */
-    public static String convertToHtml(String text){
+    public static String convertToHtml(String text) throws IOException{
 
         WikiPdfModel wikiModel = new WikiPdfModel();
         //txt = clearText(text);
         String output = wikiModel.render(text);
+        wpm = wikiModel;
+        
         // The other peice of Helvetica text for double paragraph other in PDFPageWrapper
         //replace some of these thigns to see if they are causing the problem
         output = headerToUppercase(output) + "<b>_____________________</b><br /><br />";
@@ -37,7 +42,9 @@ public class WikiHtmlConverter {
         return output;
     }
 
-
+    public static List<Reference> getModelReferences(){
+        return wpm.getReferences();
+    }
     private static String clearText(String source){
         String imagePattern = "\\[\\[Image:(.|[\r\n])*\\]\\]";
 
@@ -83,4 +90,5 @@ public class WikiHtmlConverter {
     }
 
     private static String txt = "";
+    private static WikiPdfModel wpm = null;
 }

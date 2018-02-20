@@ -8,6 +8,15 @@ that everypart of the project is in the same directory but it makes things easie
 manage.)
 
 **************************************************************************************
+
+Using a wiki dump
+	This page provides some of the past dumps of wikipedia http://dumps.wikimedia.org/enwiki/
+	The latest and largest dump is located at this address: http://dumps.wikimedia.org/enwiki/enwiki-latest-pages-articles.xml.bz2
+	The best way to download this is by using nohup and wget to make sure it goes through (these are very large files!)
+	like so: nohup wget -bcq <<http address of your file>> 
+
+--------------------------------------------------------------------------------------
+
 Setting up the database
 
 This first thing you will want to start doing is setting up the database, as it will 
@@ -47,7 +56,7 @@ Setting up a schema
 	Double Click on the existing Local Instance. 
 	In the top left corner click the "create new schema button" (The symbol is the 2 
 	golden pucks stacked ontop of eachother)
-	Give the schema a name and SWITCH COLLATION TO "utf8 - default collation", then 
+	Give the schema a name and SWITCH COLLATION TO "utf8mb4 - default collation", then 
 	click "Apply" in the bottom left corner
 --------------------------------------------------------------------------------------
 Structuring the schema
@@ -61,7 +70,13 @@ Structuring the schema
 	
 	Alternately, do it via a query in MySQLWorkbench
 	Type "USE thenameyougaveyourschema;"
-	Then paste in the contents of structure.sql
+	Then paste in the contents of structure.sql and run the code by clicking the lightning bolt button on the top menu.
+
+	*********** \.does not open file in mysql ************
+
+
+
+
 --------------------------------------------------------------------------------------
 Building the Database
 	**************
@@ -72,7 +87,7 @@ Building the Database
 	In the terminal window navigate to the folder where you have the "mwdumper.jar" and 
 	bz2 file stored (This can be the folder you are already in)
 	Type "java -jar mwdumper.jar --format=sql:1.5 yourbz2filename.bz2 --filter=latest --
-	filter=notalk | mysql -u root -p --default-character-set=utf8 yourschemaname" into 
+	filter=notalk | mysql -u root -p --default-character-set=utf8mb4 yourschemaname" into 
 	the terminal (replace yourbz2filename and yourschemaname with the correct names)
 	If everything is working correctly the terminal will start to print messages like 
 	"11,000 pages (367.432/sec), 11,000 revs (367.432/sec)"
@@ -102,12 +117,7 @@ Working with the test Database snippet
 	**this is the sped up database**
 
 --------------------------------------------------------------------------------------
-Using a wiki dump
-	This page provides some of the past dumps of wikipedia http://dumps.wikimedia.org/enwiki/
-	The latest and largest dump is located at this address: http://dumps.wikimedia.org/enwiki/enwiki-latest-pages-articles.xml.bz2
-	The best way to download this is by using nohup and wget to make sure it goes through (these are very large files!)
-	like so: nohup wget -bcq <<http address of your file>> 
---------------------------------------------------------------------------------------
+
 
 **************************************************************************************
 Database for Table of Contents
@@ -120,7 +130,7 @@ The Table of Contents database is much smaller and easier. It is really just a l
 Setting up the project to run
 --------------------------------------------------------------------------------------
 Housekeeping
-There is a list of things you will need to have in your project directory inorder to be able to successfully run printwiki:
+There is a list of things you will need to have in your project (dist) directory inorder to be able to successfully run printwiki:
 1. The "fonts" directory: 
 	This is found in your GitHub repository. Simply copy it to the directory where you 
 	will be running printwiki from.
@@ -228,6 +238,7 @@ Running Manually
 	4. "java -jar wikitopdf.jar pagenumbers" does nothing as of yet
 	5. "java -jar wikitopdf.jar covers" creates the coverpages for the outputs in the 
 	output file. 
+		*****before outputting covers check to make sure that each file is sequential and there are no files with two of the same volume number (ie. the amount of volumes matches the total number of pdfs in the output/temp folders not including the _output.pdf file). This has happened before!
 	Have some fun experimenting with the different settings to familiarize yourself 
 	with how the progam works, and make sure things are working correctly
 --------------------------------------------------------------------------------------
