@@ -15,8 +15,6 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
---MAKE SURE RIGHT HERE TO PUT YOUR DATABASE NAME LIKE SO:
---use MYDBNAME;
 
 --
 -- Table structure for table `archive`
@@ -921,6 +919,20 @@ CREATE TABLE `watchlist` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
+-- newmaster table added for the printwiki project and refdb
+
+ CREATE  TABLE `newmaster` (
+   `pkey` INT NOT NULL AUTO_INCREMENT ,
+   `page_id` INT(10) NULL ,
+   `page_title` VARCHAR(255) NULL ,
+   `rev_user_text` VARCHAR(255) NULL ,
+   `rev_comment` TINYBLOB NULL ,
+   `old_text` LONGTEXT NULL ,
+   PRIMARY KEY (`pkey`) )
+ ENGINE = MyISAM
+ DEFAULT CHARACTER SET = utf8mb4;
+
+
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
 /*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
@@ -930,3 +942,5 @@ CREATE TABLE `watchlist` (
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
 -- Dump completed on 2013-05-16 14:28:20
+
+
